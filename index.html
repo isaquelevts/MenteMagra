@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Método Mente Magra — Consultoria 3M</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,800&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.383.0/umd/lucide.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FDFDFB;
+    --bg2: #FDFDFB;
+    --surface: #ffffff;
+    --surface2: #F5F3F0;
+    --border: rgba(24,36,10,0.08);
+    --border2: rgba(24,36,10,0.14);
+    --brand: #88431D;
+    --brand-light: #A0552D;
+    --brand-dim: rgba(136,67,29,0.1);
+    --brand-glow: rgba(136,67,29,0.2);
+    --green: #27361C;
+    --green-light: #3A5232;
+    --green-dim: rgba(39,54,28,0.1);
+    --text: #18240A;
+    --text2: #27361C;
+    --text3: #4A523D;
+    --serif: 'Raleway', sans-serif;
+    --sans: 'Raleway', sans-serif;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SUBTLE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+  }
+
+  /* LAYOUT */
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .container-wide { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  section { padding: 100px 0; position: relative; }
+  section + section { border-top: 1px solid var(--border); }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-dim);
+    border: 1px solid rgba(39,54,28,0.3);
+    color: var(--green-light);
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 28px;
+  }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-light); animation: pulse 2s infinite; }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.3)} }
+
+  /* TYPOGRAPHY */
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  p { color: var(--text2); font-size: 1.05rem; margin-bottom: 16px; }
+  .lead { font-size: 1.15rem; line-height: 1.75; }
+  .italic { font-style: italic; }
+  em { font-style: italic; color: var(--green-light); }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--brand), #733918);
+    color: #fff;
+    font-family: var(--sans); font-size: 1rem; font-weight: 600;
+    padding: 16px 32px; border-radius: var(--radius-sm);
+    border: none; cursor: pointer; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 30px var(--brand-glow);
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px var(--brand-glow); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--text2);
+    font-family: var(--sans); font-size: 0.95rem; font-weight: 500;
+    padding: 14px 28px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border2); cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--green-light); color: var(--green-light); }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: border-color 0.25s;
+  }
+  .card:hover { border-color: var(--border2); }
+  .card-accent { border-color: rgba(39,54,28,0.25); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    section { padding: 70px 0; }
+    #dor .container > div { grid-template-columns: 1fr !important; gap: 36px !important; }
+    #dor .dor-img { order: -1; }
+  }
+
+  /* ICON BOX */
+  .icon-box {
+    width: 48px; height: 48px; border-radius: var(--radius-sm);
+    background: var(--green-dim);
+    border: 1px solid rgba(39,54,28,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 18px;
+  }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); margin: 16px 0; }
+
+  /* HERO SECTION */
+  #hero {
+    padding: 120px 0 100px;
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(39,54,28,0.06) 0%, transparent 70%);
+  }
+  #hero .container { text-align: center; }
+  #hero h1 span { color: var(--brand-light); display: block; }
+  #hero h1 .italic { font-style: italic; }
+  #hero p { max-width: 600px; margin: 0 auto 32px; font-size: 1.15rem; }
+  .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .hero-note {
+    margin-top: 40px;
+    color: var(--text3); font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  /* FLOATING LINES */
+  .lines-bg {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    opacity: 0.04;
+  }
+  .lines-bg::before {
+    content: '';
+    position: absolute; left: 50%; top: 0;
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--green), transparent);
+    transform: translateX(-300px);
+  }
+  .lines-bg::after {
+    content: '';
+    position: absolute; left: 50%; top: 0;
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--green), transparent);
+    transform: translateX(300px);
+  }
+
+  /* DOR SECTION */
+  .dor-list { list-style: none; }
+  .dor-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
+    color: var(--text2); font-size: 1.05rem;
+  }
+  .dor-list li:last-child { border-bottom: none; }
+  .dor-list .dash { color: var(--green); font-weight: 700; margin-top: 2px; }
+
+  /* CHECK LIST */
+  .check-list { list-style: none; }
+  .check-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; color: var(--text2); font-size: 1rem;
+  }
+  .check-list .chk { color: var(--green); font-size: 1.1rem; margin-top: 1px; }
+
+  /* PILLARS */
+  .pillar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+
+  /* STEPS */
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    position: relative;
+  }
+  .step-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--green-dim); border: 1px solid rgba(39,54,28,0.3);
+    color: var(--green); font-weight: 700; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  /* TESTIMONIALS */
+  .testimonial {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+  .testimonial .quote { font-size: 2rem; color: var(--green-light); line-height: 1; margin-bottom: 16px; }
+  .testimonial p { color: var(--text); font-style: italic; font-size: 1rem; margin-bottom: 20px; }
+  .testimonial .author { color: var(--text3); font-size: 0.9rem; font-weight: 500; }
+  .stars { color: var(--green-light); font-size: 0.85rem; margin-bottom: 8px; letter-spacing: 2px; }
+
+  /* PRICING */
+  .pricing-card {
+    background: var(--surface2);
+    border: 1px solid rgba(39,54,28,0.3);
+    border-radius: var(--radius);
+    padding: 48px;
+    text-align: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 4px 40px rgba(39,54,28,0.08);
+  }
+  .price-old { color: var(--text3); font-size: 1.1rem; text-decoration: line-through; margin-bottom: 4px; }
+  .price-new {
+    font-family: var(--serif); font-size: 3.5rem; font-weight: 800; color: var(--green-light); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .price-sub { color: var(--text3); font-size: 0.95rem; margin-bottom: 32px; }
+  .guarantee-badges { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
+  .g-badge {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--green-dim); border: 1px solid rgba(39,54,28,0.3);
+    color: var(--green-light); font-size: 0.82rem; font-weight: 600;
+    padding: 6px 14px; border-radius: 999px;
+  }
+
+  /* WHAT YOU GET */
+  .deliverable {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 0; border-bottom: 1px solid var(--border);
+  }
+  .deliverable:last-child { border-bottom: none; }
+  .deliverable .icon { font-size: 1.3rem; margin-top: 2px; flex-shrink: 0; }
+  .deliverable strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 4px; }
+  .deliverable p { font-size: 0.95rem; margin-bottom: 0; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 0; cursor: pointer;
+    font-weight: 600; font-size: 1rem; color: var(--text);
+    background: none; border: none; width: 100%; text-align: left;
+  }
+  .faq-q:hover { color: var(--green-light); }
+  .faq-a { padding: 0 0 24px; color: var(--text2); font-size: 0.97rem; display: none; }
+  .faq-a.open { display: block; }
+  .faq-arrow { font-size: 1.2rem; color: var(--text3); transition: transform 0.2s; flex-shrink: 0; }
+  .faq-arrow.open { transform: rotate(45deg); }
+
+  /* LEAD MAGNET */
+  .lead-box {
+    background: linear-gradient(135deg, var(--surface2), var(--surface));
+    border: 1px solid rgba(39,54,28,0.2);
+    border-radius: var(--radius);
+    padding: 48px 40px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .lead-box::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 150px;
+    background: radial-gradient(ellipse at center bottom, var(--green-dim), transparent);
+    pointer-events: none;
+  }
+
+  /* AUTHORITY */
+  .authority-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .stat-item { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .stat-num {
+    font-family: var(--serif); font-size: 2.5rem; font-weight: 800;
+    color: var(--green-light); line-height: 1;
+  }
+  .stat-label { color: var(--text3); font-size: 0.9rem; margin-top: 4px; }
+
+  @media (max-width: 768px) {
+    .authority-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .pricing-card { padding: 36px 24px; }
+    .lead-box { padding: 40px 24px; }
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text3); font-size: 0.85rem;
+  }
+  footer a { color: var(--text3); text-decoration: none; }
+  footer a:hover { color: var(--green-light); }
+
+  /* SCROLL ANIMATION */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* OVERLINE */
+  .overline { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-light); margin-bottom: 12px; }
+
+  /* HORIZONTAL RULE */
+  hr { border: none; height: 1px; background: var(--border); margin: 0; }
+
+  /* LUCIDE ICONS */
+  .ic { display: inline-flex; align-items: center; justify-content: center; }
+  .icon-box .ic svg { width: 22px; height: 22px; stroke: var(--green-light); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .deliverable .ic { flex-shrink: 0; margin-top: 2px; }
+  .deliverable .ic svg { width: 22px; height: 22px; stroke: var(--green-light); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .btn-primary .ic svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .btn-secondary .ic svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .hero-note .ic svg { width: 14px; height: 14px; stroke: var(--text3); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .g-badge .ic svg { width: 13px; height: 13px; stroke: var(--green-light); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .pillar-icon { margin-bottom: 16px; }
+  .pillar-icon svg { width: 42px; height: 42px; stroke: var(--green-light); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .star-ic { color: var(--green-light); }
+  .star-ic svg { width: 14px; height: 14px; fill: var(--green-light); stroke: var(--green-light); stroke-width: 1; }
+  .stars-row { display: flex; gap: 3px; margin-bottom: 12px; }
+  .badge-ic svg { width: 13px; height: 13px; stroke: var(--green-light); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .chk-ic svg { width: 18px; height: 18px; stroke: var(--green-light); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="lines-bg"></div>
+  <div class="container">
+    <div class="reveal">
+      <div class="badge"><span class="dot"></span> Lançamento — Vagas Limitadas</div>
+    </div>
+    <h1 class="reveal reveal-delay-1">
+      Você sabe o que fazer.<br />
+      <span style="font-style:italic; color:var(--green-light);">Mas não consegue manter.</span>
+      <span style="font-size:0.55em; font-weight:400; color:var(--text2); display:block; margin-top:16px; font-style:normal; letter-spacing:0;">
+        O problema não é você — é que ninguém te ensinou como a sua mente sabota o seu resultado.
+      </span>
+    </h1>
+    <p class="reveal reveal-delay-2">
+      O <strong style="color:var(--text)">Método Mente Magra</strong> é o primeiro acompanhamento nutricional que trata o <em>comportamento alimentar</em> — não só a dieta. Para quem já tentou de tudo… e continua estagnada.
+    </p>
+    <div class="hero-ctas reveal reveal-delay-3">
+      <a href="#oferta" class="btn-primary"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span> Quero descobrir meu padrão alimentar</a>
+      <a href="#como-funciona" class="btn-secondary"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span> Entender como funciona</a>
+    </div>
+    <div class="hero-note reveal">
+      <span class="ic"><svg viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span> Garantia de 7 dias &nbsp;·&nbsp; Entrega em até 5 dias úteis &nbsp;·&nbsp; 100% online
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOR ===== -->
+<section id="dor">
+  <div class="container">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <div>
+        <div class="reveal">
+          <div class="overline">A realidade de quem já tentou</div>
+          <h2>Você começa motivada…<br /><em>e por que não dura?</em></h2>
+          <p>Você compra comida saudável. Promete que "agora vai". E então:</p>
+        </div>
+        <div style="margin-top:12px;">
+          <ul class="dor-list reveal">
+            <li><span class="dash">—</span> Um dia estressante vira desculpa</li>
+            <li><span class="dash">—</span> Um final de semana vira descontrole</li>
+            <li><span class="dash">—</span> Um deslize vira desistência</li>
+            <li><span class="dash">—</span> A culpa vira ciclo infinito de recomeços</li>
+          </ul>
+          <div class="card card-accent reveal" style="margin-top:32px;">
+            <p style="color:var(--text); font-size:1.1rem; font-style:italic; margin-bottom:0;">
+              "Eu sei o que fazer… então por que eu não consigo?"
+            </p>
+            <p style="font-size:0.9rem; margin-top:10px; margin-bottom:0;">
+              Porque a maioria dos métodos ignora um fator essencial: <strong style="color:var(--text)">a sua vida real.</strong>
+            </p>
+          </div>
+          <div class="reveal" style="margin-top:28px;">
+            <a href="#oferta" class="btn-primary">Quero mudar agora</a>
+          </div>
+        </div>
+      </div>
+      <!-- Imagem placeholder — substitua o src pela imagem oficial -->
+      <div class="reveal reveal-delay-2 dor-img" style="display:flex; align-items:center; justify-content:center;">
+        <div style="
+          width: 100%;
+          aspect-ratio: 4/5;
+          background: linear-gradient(145deg, #D6D3CE, #C2BFB9);
+          border-radius: var(--radius);
+          border: 1px solid var(--border2);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          color: #8A8780;
+          font-size: 0.85rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          overflow: hidden;
+          position: relative;
+        ">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8A8780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <span>Sua imagem aqui</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VERDADE ===== -->
+<section id="verdade">
+  <div class="container">
+    <div class="grid-2" style="gap:60px; align-items:center;">
+      <div>
+        <div class="overline reveal">A verdade difícil</div>
+        <h2 class="reveal">Você não precisa de mais dieta.</h2>
+        <p class="reveal lead">Você precisa de um método que trate o comportamento — não só o cardápio.</p>
+        <ul class="check-list reveal" style="margin-top:20px;">
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Vive no efeito sanfona</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Come bem por 3 dias e depois desanda</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Desiste por culpa, rotina ou ansiedade</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Sofre com alimentação emocional</li>
+        </ul>
+        <p class="reveal" style="margin-top:24px; color:var(--green-light); font-weight:600;">
+          O problema não é você. É o modelo antigo de acompanhamento.
+        </p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="card" style="border-color:rgba(39,54,28,0.2);">
+          <div class="icon-box"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></span></div>
+          <h3>Por que outros métodos falham?</h3>
+          <p>Planos de dieta pensados para uma rotina perfeita — que não existe. Sem considerar seus gatilhos emocionais, sua realidade de trabalho, família e vida social.</p>
+          <div class="divider"></div>
+          <p style="color:var(--text); font-style:italic; font-size:0.95rem; margin-bottom:0;">Com o Método Mente Magra, a estratégia é construída <em>dentro</em> da sua realidade.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUÇÃO ===== -->
+<section id="solucao">
+  <div class="container">
+    <div style="text-align:center; max-width:620px; margin:0 auto 56px;" class="reveal">
+      <div class="overline">Consultoria 3M</div>
+      <h2>Método Mente Magra</h2>
+      <p>Um método estruturado em 3 pilares que atuam juntos para que você nunca mais precise recomeçar do zero.</p>
+    </div>
+    <div class="grid-3">
+      <div class="pillar-card reveal">
+        <div class="pillar-icon"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></span></div><h3>MENTE</h3>
+        <p>Identifique seus sabotadores, gatilhos e padrões emocionais. Entenda o que te faz desistir — antes que aconteça.</p>
+      </div>
+      <div class="pillar-card reveal reveal-delay-1">
+        <div class="pillar-icon"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span></div><h3>MÉTODO</h3>
+        <p>Estratégia alimentar personalizada para a sua rotina real — trabalho, família, vida social incluídos.</p>
+      </div>
+      <div class="pillar-card reveal reveal-delay-2">
+        <div class="pillar-icon"><span class="ic"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span></div><h3>MAGRA</h3>
+        <p>Quando você entende sua mente, você não volta para o efeito sanfona. Resultado sustentável — sem recomeços.</p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:36px; font-size:1rem; color:var(--green-light); font-style:italic;" class="reveal">
+      Entenda sua mente. Emagreça. E sustente o resultado.
+    </p>
+    <div style="text-align:center; margin-top:32px;" class="reveal">
+      <a href="#oferta" class="btn-primary">Começar agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AUTORIDADE ===== -->
+<section id="autoridade">
+  <div class="container">
+    <div class="authority-wrap">
+      <div>
+        <div class="overline reveal">Quem está por trás do método</div>
+        <h2 class="reveal">Eu já estive do outro lado.</h2>
+        <p class="reveal lead">Eu emagreci 38kg — e não foi com dieta da moda. Foi com método.</p>
+        <p class="reveal">Hoje, não ensino só o que funciona na teoria. Ensino o que funciona na vida real — porque vivi os dois lados:</p>
+        <p class="reveal" style="color:var(--text); font-style:italic;">a frustração… e a transformação.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="stat-item">
+          <div class="stat-num">38kg</div>
+          <div class="stat-label">Eliminados com método — não modinha</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5 perfis</div>
+          <div class="stat-label">Volumétrico · Beliscador · Noturno · Compulsivo · Desorganizado</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Compatível com bioimpedância pela avaliação por IA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMO FUNCIONA ===== -->
+<section id="como-funciona">
+  <div class="container">
+    <div style="text-align:center; max-width:580px; margin:0 auto 56px;" class="reveal">
+      <div class="overline">Passo a passo</div>
+      <h2>Como funciona na prática</h2>
+    </div>
+    <div class="grid-3">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3>Descubra seu padrão</h3>
+        <p>Analisamos seu histórico, hábitos, rotina e comportamento. Você vai entender exatamente qual é o seu perfil alimentar e por que as tentativas anteriores falharam.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <h3>Crie um plano real</h3>
+        <p>A estratégia é construída dentro da sua realidade: trabalho, família, vida social. Nada de dieta perfeita para uma vida que não existe.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <h3>Pare de depender de motivação</h3>
+        <p>Você aprende um método sustentável. Sem efeito rebote. Sem recomeçar toda segunda-feira. Com suporte real durante o processo.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;" class="reveal">
+      <a href="#oferta" class="btn-primary">Ver oferta</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== O QUE VOCÊ RECEBE ===== -->
+<section id="recebe">
+  <div class="container">
+    <div style="text-align:center; max-width:580px; margin:0 auto 48px;" class="reveal">
+      <div class="overline">O que está incluso</div>
+      <h2>Tudo que você vai receber</h2>
+    </div>
+    <div class="grid-2" style="gap:32px;">
+      <div class="reveal">
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+          <div>
+            <strong>Diagnóstico completo do seu perfil alimentar</strong>
+            <p>Descubra exatamente qual é o seu padrão — e como corrigir cada um.</p>
+          </div>
+        </div>
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-3.19 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/></svg></span>
+          <div>
+            <strong>Plano alimentar adaptado à sua rotina</strong>
+            <p>A dieta se adapta à sua vida — não o contrário. Flexível, real e sustentável.</p>
+          </div>
+        </div>
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l1.5-3 2 6 1.5-4 1.5 1H21"/></svg></span>
+          <div>
+            <strong>Guia para controlar compulsão e ansiedade</strong>
+            <p>Ferramentas práticas para quebrar o ciclo emocional com a comida.</p>
+          </div>
+        </div>
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+          <div>
+            <strong>Acompanhamento com suporte real</strong>
+            <p>Sem abandono. Presença durante todo o processo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
+          <div>
+            <strong>Questionários completos de anamnese</strong>
+            <p>Rotina, alimentação, sono, intestino e comportamento.</p>
+          </div>
+        </div>
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg></span>
+          <div>
+            <strong>E-book personalizado com sua estratégia</strong>
+            <p>Alimentar e comportamental — feito especificamente para o seu perfil.</p>
+          </div>
+        </div>
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg></span>
+          <div>
+            <strong>Avaliação física por IA</strong>
+            <p>98% compatível com bioimpedância — via foto, sem consulta presencial.</p>
+          </div>
+        </div>
+        <div class="deliverable">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></span>
+          <div>
+            <strong>Plataforma com aulas rápidas</strong>
+            <p>Vontade de doce · Marmitas · Ciclo hormonal · Ansiedade alimentar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEPOIMENTOS ===== -->
+<section id="depoimentos">
+  <div class="container">
+    <div style="text-align:center; max-width:500px; margin:0 auto 48px;" class="reveal">
+      <div class="overline">Resultados reais</div>
+      <h2>Quem já transformou</h2>
+    </div>
+    <div class="grid-3">
+      <div class="testimonial reveal">
+        <div class="stars-row"><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span></div>
+        <p>Nunca consegui manter uma dieta por mais de 1 mês. Com esse método, foi a primeira vez que eu não me senti fracassada.</p>
+        <div class="author">— Cliente, 28 anos</div>
+      </div>
+      <div class="testimonial reveal reveal-delay-1">
+        <div class="stars-row"><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span></div>
+        <p>Meu perfil era totalmente emocional e eu nem sabia. Só essa descoberta já virou a chave de tudo.</p>
+        <div class="author">— Cliente, 35 anos</div>
+      </div>
+      <div class="testimonial reveal reveal-delay-2">
+        <div class="stars-row"><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="star-ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span></div>
+        <div class="quote">"</div>
+        <p>Eu sempre desistia na segunda semana. Hoje já estou há 3 meses consistente e sem surtar com comida.</p>
+        <div class="author">— Mariana, 32 anos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OFERTA ===== -->
+<section id="oferta">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:48px;" class="reveal">
+      <div class="badge" style="justify-content:center;"><span class="dot"></span> Oferta especial de lançamento</div>
+      <h2 style="margin-bottom:8px;">Comece agora.</h2>
+      <p>Vagas limitadas para manter a qualidade do acompanhamento.</p>
+    </div>
+    <div style="max-width:600px; margin:0 auto;" class="reveal">
+      <div class="pricing-card">
+        <!-- O que você recebe -->
+        <h3 style="margin-bottom:16px; color:var(--text); text-align:center;">O que você recebe:</h3>
+        <ul class="check-list" style="margin-top:0; margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid var(--border); max-width:480px; margin-left:auto; margin-right:auto;">
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Diagnóstico completo do seu perfil alimentar</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Plano alimentar personalizado</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Guia para controlar compulsão</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Acompanhamento com suporte real</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Questionários completos de anamnese</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> E-book personalizado com sua estratégia</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Avaliação física por IA</li>
+          <li><span class="chk-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Plataforma com aulas rápidas</li>
+        </ul>
+
+        <!-- Preço -->
+        <div style="text-align:center; margin-bottom:32px;">
+          <div class="price-old">De R$ 700</div>
+          <div class="price-new">R$ 347</div>
+          <div class="price-sub">à vista — ou 12x de R$ 34,70</div>
+        </div>
+
+        <!-- Botão -->
+        <a href="#" class="btn-primary" style="width:100%; justify-content:center; font-size:1.05rem; padding:18px 32px;">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span> Quero meu acompanhamento agora
+        </a>
+        <div class="guarantee-badges">
+          <div class="g-badge"><span class="ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Garantia de 7 dias</div>
+          <div class="g-badge"><span class="ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Plano em 5 dias úteis</div>
+          <div class="g-badge"><span class="ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Plataforma por 3 meses</div>
+        </div>
+        <p style="margin-top:24px; font-size:0.82rem; color:var(--text3); margin-bottom:0;">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span> Compra segura · Ambiente criptografado · Satisfação garantida
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="container">
+    <div style="max-width:680px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:48px;" class="reveal">
+        <div class="overline">Dúvidas frequentes</div>
+        <h2>Perguntas e respostas</h2>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          A dieta é realmente personalizada?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Sim. Cada plano é baseado nas suas respostas e avaliação por fotos. Nada é genérico — tudo é construído a partir da sua realidade.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Serve para quem tem SOP, lipedema ou outras condições?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Sim! Seu histórico e exames são considerados na construção do plano. Quanto mais detalhada sua anamnese, melhor o resultado.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Tem prescrição de manipulados?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Somente se houver necessidade e com base em exames. Não é algo padrão, mas está dentro das possibilidades do acompanhamento.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Tenho problemas intestinais, vou receber algo específico?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Sim! Tudo é adaptado à sua realidade — intestino, sono, rotina e comportamento são avaliados no questionário completo.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          É tudo online?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Sim. Todo o acompanhamento é remoto. Você acessa a plataforma de qualquer lugar e recebe suporte pelo canal de comunicação definido.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FECHAMENTO ===== -->
+<section id="fechamento">
+  <div class="container" style="text-align:center; max-width:640px;">
+    <div class="reveal">
+      <div class="overline">A decisão é sua</div>
+      <h2>Você pode continuar tentando do mesmo jeito…</h2>
+      <p class="lead" style="margin-bottom:32px;">
+        Ou pode finalmente entender o que te trava.<br />
+        <span style="color:var(--text); font-style:italic;">O seu resultado também será seu.</span>
+      </p>
+      <a href="#oferta" class="btn-primary" style="font-size:1.05rem; padding:18px 36px;">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span> Quero parar de recomeçar e ter resultado de verdade
+      </a>
+      <div class="hero-note" style="margin-top:24px;">
+        <span class="ic"><svg viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span> Compra segura &nbsp;·&nbsp; Garantia de 7 dias &nbsp;·&nbsp; Plataforma profissional
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEAD MAGNET ===== -->
+<section id="lead">
+  <div class="container">
+    <div class="lead-box reveal">
+      <div class="badge" style="margin:0 auto 24px;"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span> Ainda não tem certeza?</div>
+      <h2 style="margin-bottom:16px;">Descubra seu perfil alimentar</h2>
+      <p style="max-width:480px; margin:0 auto 32px;">
+        Responda o questionário gratuito e entenda qual dos 5 perfis é o seu — e o que fazer a partir daí.
+      </p>
+      <a href="#" class="btn-primary" style="font-size:1rem;">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg></span> Quero descobrir meu perfil gratuitamente
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <p style="margin-bottom:8px; color:var(--text3);">
+      Método Mente Magra · Consultoria 3M
+    </p>
+    <p style="margin-bottom:0; font-size:0.8rem;">
+      <a href="#">Política de Privacidade</a> &nbsp;·&nbsp; <a href="#">Termos de Uso</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // FAQ Toggle
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const arrow = btn.querySelector('.faq-arrow');
+    answer.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
